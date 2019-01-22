@@ -1,5 +1,6 @@
 package com.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,14 @@ public class CategoriaService {
 	
 	public void delete(Integer id) {
 		this.find(id);
-		
 		try {
 			repository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível exluir uma categoria que possuí produtos");
 		}
+	}
+	
+	public List<Categoria> findAll() {
+		return repository.findAll();
 	}
 }
